@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Bookify.wep.Models.Rooms.RoomDto>
+
+@{
+    ViewData["Title"] = "Our Rooms";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/rooms-styles.css" />
+    <link rel="stylesheet" href="~/css/date-utils.css" />
+}
+
+@{
+    // هل المستخدم Admin؟
+    var isAdmin = string.Equals(Context.Session.GetString("UserRole"), "admin", StringComparison.OrdinalIgnoreCase);
+}
+
+
+<section class="rooms-page-content container">
+    <header class="rooms-header">
+        <div class="shell-icon-small"></div>
+        <h2 class="section-heading">Our Rooms</h2>
+        <p class="rooms-subtitle">Choose the perfect room for your stay</p>
+    </header>
+
+    <section class="filter-controls container">
+        <div class="date-picker-group">
+            <input id="checkin" type="date" placeholder="Check In Date" />
+            <input id="checkout" type="date" placeholder="Check Out Date" />
+            <div id="nights-display" class="nights-display">&nbsp;</div>
+            <select>
+                <option value="">Guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="4">4+ Guests</option>
+            </select>
+            <button class="btn secondary-btn filter-btn">Search</button>
+            <div id="date-error" class="date-error" style="display:none;"></div>
+        </div>
+
+        <div class="amenity-filters">
+            <label>Filter By:</label>
+            <button class="filter-option" data-filter="ocean">Ocean View</button>
+            <button class="filter-option" data-filter="king">King Bed</button>
+            <button class="filter-option" data-filter="balcony">Balcony</button>
+            <select class="sort-by">
+                <option value="low-to-high">Sort By Price</option>
+                <option value="high-to-low">Price: High to Low</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- زر Add يظهر فقط لو المستخدم Admin -->
+    <div class="add-room-area container">
+        @if (isAdmin)
+        {
+            <a asp-controller="Rooms" asp-action="Create" class="btn primary-btn add-room-btn">Add</a>
+        }
+    </div>
+
+    <div class="full-rooms-grid">
+        @if (Model == null || !Model.Any())
+        {
+            <div style="padding:20px; text-align:center; color:#666;">
+                No rooms found.
+                @if (isAdmin)
+                {
+                    <span>Use the <a asp-controller="Rooms" asp-action="Create">Add</a> button to insert rooms.</span>
+                }
+            </div>
+        }
+        else
+        {
+            foreach (var r in Model)
+            {
+                <div class="room-card-full" data-room-id="@r.RoomId">
+                    <div class="room-image" style="
+            height:220px;
+            background-image:url('/images/rooms/default.jpg');
+            background-size:cover;
+            background-position:center;
+            border-radius:8px;">
+                    </div>
+
+
+                    <div class="card-content">
+                        <h3 class="room-title">@r.RoomType</h3>
+                        <p class="room-description">@r.Rstatus</p>
+
+                        <div class="card-footer">
+                            <p class="room-price">@string.Format("{0:C}", r.Price) / night</p>
+
+                            <div class="action-buttons">
+
+                                <!-- أزرار Edit/Delete تظهر فقط لو Admin -->
+                                @if (isAdmin)
+                                {
+                                    <a asp-controller="Rooms" asp-action="Edit" asp-route-id="@r.RoomId"
+                                       class="btn secondary-btn edit-room-btn">Edit</a>
+
+                                    <form asp-controller="Rooms"
+                                          asp-action="Delete"
+                                          asp-route-id="@r.RoomId"
+                                          method="post"
+                                          style="display:inline;">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn danger-btn delete-room-btn"
+                                                onclick="return confirm('Are you sure?');">
+                                            Delete
+                                        </button>
+                                    </form>
+                                }
+
+                                <!-- يظهر للجميع -->
+                                <a asp-controller="Rooms" asp-action="Details" asp-route-id="@r.RoomId"
+                                   class="btn book-room-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/rooms-filter.js"></script>
+    <script src="~/js/nav.js"></script>
+}

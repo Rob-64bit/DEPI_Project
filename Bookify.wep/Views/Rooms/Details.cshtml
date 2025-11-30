@@ -1,0 +1,162 @@
+﻿@model Bookify.wep.Models.Rooms.RoomDto
+
+@{
+    ViewData["Title"] = Model?.RoomType ?? "Room Details";
+    // helper to pick image files (adjust filenames to match your wwwroot/images/rooms)
+    string[] ImageFiles()
+    {
+        var rt = (Model?.RoomType ?? "").ToLowerInvariant();
+        if (rt.Contains("ocean") || rt.Contains("view")) return new[] { "ocean-1.jpg", "ocean-2.jpg", "ocean-3.jpg" };
+        if (rt.Contains("deluxe")) return new[] { "deluxe-1.jpg", "deluxe-2.jpg", "deluxe-3.jpg" };
+        if (rt.Contains("family")) return new[] { "family-1.jpg", "family-2.jpg", "family-3.jpg" };
+        if (rt.Contains("single")) return new[] { "single-1.jpg", "single-2.jpg", "single-3.jpg" };
+        return new[] { "default-1.jpg", "default-2.jpg", "default-3.jpg" };
+    }
+
+    var images = ImageFiles();
+    string mainImageUrl(string file) => Url.Content($"~/images/rooms/{file}");
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/room-detail-styles.css" />
+    <!-- include any other css you need -->
+}
+
+
+
+<div class="detail-page-container container">
+    <h1 class="room-name">@Model.RoomType</h1>
+    <p class="room-tagline">@Model.Rstatus</p>
+
+    <section class="room-gallery">
+        <div id="main-image" class="main-image" style="background-image:url('@mainImageUrl(images[0])')"></div>
+
+        <div class="thumbnail-images">
+            @for (int i = 0; i < images.Length; i++)
+            {
+                <div class="thumbnail" data-src="@mainImageUrl(images[i])" style="background-image:url('@mainImageUrl(images[i])')"></div>
+            }
+        </div>
+    </section>
+
+    <div class="detail-layout">
+        <div class="description-amenities-column">
+            <section class="description-box">
+                <h2>Suite Overview</h2>
+                <p>@Model.Rstatus</p>
+                <p>Room ID: @Model.RoomId</p>
+                <p><strong>Price:</strong> @string.Format("{0:C}", Model.Price) / night</p>
+                <!-- لو عندك وصف أطول من DB أضفه هنا -->
+            </section>
+
+            <section class="amenities-box">
+                <h2>Key Amenities</h2>
+                <ul class="amenities-list">
+                    <!-- ثابت — لو تحب تجيب من DB أضف حقل Amenities في DTO -->
+                    <li><i class="fas fa-water"></i> Private Ocean-Facing Balcony</li>
+                    <li><i class="fas fa-bed"></i> King-Size Bed with Premium Linen</li>
+                    <li><i class="fas fa-wifi"></i> Complimentary High-Speed Wi-Fi</li>
+                    <li><i class="fas fa-coffee"></i> Coffee Maker and Mini-Bar</li>
+                    <li><i class="fas fa-bath"></i> Luxurious Marble Bathroom</li>
+                    <li><i class="fas fa-tv"></i> 55-inch Smart TV</li>
+                    <li><i class="fas fa-couch"></i> Separate Sitting Area</li>
+                    <li><i class="fas fa-door-closed"></i> Soundproofed Walls</li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="booking-form-column">
+            <div class="quick-book-box">
+                <div class="price-display">
+                    <span class="price-label">Starting From</span>
+                    <span class="price-value">@string.Format("{0:C}", Model.Price)</span>
+                    <span class="price-suffix">/ night</span>
+                </div>
+
+                <!-- booking form: GET to Bookings/Create -->
+                <form id="booking-form" method="get" asp-controller="Bookings" asp-action="Create">
+                    <input type="hidden" name="roomId" value="@Model.RoomId" />
+
+                    <div class="form-group">
+                        <label for="checkin">Check-in Date</label>
+                        <input id="checkin" name="checkin" type="date" class="form-control" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout">Check-out Date</label>
+                        <input id="checkout" name="checkout" type="date" class="form-control" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Guests</label>
+                        <select id="guests" name="guests" class="form-control">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4+ Guests</option>
+                        </select>
+                    </div>
+
+                    <div id="nights-display" style="margin-top:8px; color:#334; font-weight:700;">&nbsp;</div>
+                    <div id="date-error" style="display:none; color:#b33; margin-top:8px;"></div>
+
+                    <div style="margin-top:12px; display:flex; gap:8px;">
+                        <button id="book-now-btn" type="submit" class="btn primary-btn" disabled>Reserve Now</button>
+                        <a asp-controller="Rooms" asp-action="Index" class="btn secondary-btn">Cancel</a>
+                    </div>
+                </form>
+
+
+
+
+
+                <p class="cancellation-policy">Free cancellation up to 48 hours before check-in.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function(){
+        const checkin = document.getElementById('checkin');
+        const checkout = document.getElementById('checkout');
+        const nightsEl = document.getElementById('nights-display');
+        const err = document.getElementById('date-error');
+        const bookBtn = document.getElementById('book-now-btn');
+        const MS_PER_DAY = 24*60*60*1000;
+
+        function toDateISO(input){ return input ? new Date(input + 'T00:00:00') : null; }
+
+        function validate(){
+            err.style.display = 'none';
+            nightsEl.textContent = '';
+            bookBtn.disabled = true;
+            const ci = toDateISO(checkin?.value);
+            const co = toDateISO(checkout?.value);
+            if(!ci || !co) return;
+            if(co <= ci){
+                err.style.display = 'block';
+                err.textContent = 'Check-out must be after check-in.';
+                return;
+            }
+            const nights = Math.round((co - ci)/MS_PER_DAY);
+            if(nights <= 0) return;
+            nightsEl.textContent = nights + (nights===1 ? ' night' : ' nights');
+            bookBtn.disabled = false;
+        }
+
+        if(checkin) checkin.addEventListener('change', validate);
+        if(checkout) checkout.addEventListener('change', validate);
+
+        // Optional: prevent manual submit when invalid (extra guard)
+        document.getElementById('booking-form').addEventListener('submit', function(e){
+            const ci = toDateISO(checkin?.value);
+            const co = toDateISO(checkout?.value);
+            if(!ci || !co || co <= ci){
+                e.preventDefault();
+                validate();
+            }
+        });
+    })();
+</script>
+

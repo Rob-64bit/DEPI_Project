@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Bookify.wep.Models.Payments.PaymentAdminDto>
+
+<div class="payments-wrapper" style="
+    background:#fff;
+    padding:25px;
+    border-radius:8px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    margin:20px auto;
+">
+
+    <h2 style="margin-bottom:20px; font-size:24px; font-weight:600; color:#333;">
+        💳 Payments Summary
+    </h2>
+
+    <table class="table payments-table" style="width:100%; border-collapse:separate; border-spacing:0 8px;">
+        <thead>
+            <tr style="background:#f4f4f4; color:#444; text-align:left; font-weight:600;">
+                <th style="padding:12px;">ID</th>
+                <th style="padding:12px;">Booking</th>
+                <th style="padding:12px;">Guest</th>
+                <th style="padding:12px;">Amount</th>
+                <th style="padding:12px;">Status</th>
+                <th style="padding:12px;">Date</th>
+                <th style="padding:12px;">Payment Intent</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr style="
+                        background:#fff;
+                        box-shadow:0 2px 6px rgba(0,0,0,0.05);
+                        border-radius:6px;
+                    ">
+                    <td style="padding:12px;">@p.Id</td>
+                    <td style="padding:12px; font-weight:600;">#@p.BookingId</td>
+                    <td style="padding:12px;">@(p.GuestName ?? "N/A")</td>
+                    <td style="padding:12px; color:#2c7a2c; font-weight:600;">
+                        @String.Format("{0:C}", p.Amount)
+                    </td>
+                    <td style="padding:12px;">
+                        @if (p.Status == "succeeded")
+                        {
+                            <span style="background:#d4f5d4; color:#2d7a2d; padding:4px 10px; border-radius:20px; font-size:0.85rem;">Succeeded</span>
+                        }
+                        else if (p.Status == "pending")
+                        {
+                            <span style="background:#fff3cd; color:#a07902; padding:4px 10px; border-radius:20px; font-size:0.85rem;">Pending</span>
+                        }
+                        else
+                        {
+                            <span style="background:#f8d7da; color:#842029; padding:4px 10px; border-radius:20px; font-size:0.85rem;">Failed</span>
+                        }
+                    </td>
+                    <td style="padding:12px;">@p.PaymentDate.ToString("yyyy-MM-dd")</td>
+                    <td style="padding:12px;">@p.StripePaymentIntentId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

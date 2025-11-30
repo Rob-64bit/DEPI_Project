@@ -1,0 +1,271 @@
+﻿@model IEnumerable<Bookify.wep.Models.Bookings.BookingDto>
+@{
+    // إعدادات العرض (View)
+    ViewData["Title"] = "Manage Bookings";
+
+    // تصنيف الحجوزات حسب الحالة
+    var pendingBookings = Model.Where(b => b.BookingStatus?.ToLower() == "pending").ToList();
+    var confirmedBookings = Model.Where(b => b.BookingStatus?.ToLower() == "confirmed").ToList();
+    var cancelledBookings = Model.Where(b => b.BookingStatus?.ToLower() == "cancelled").ToList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        .bookings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+            .bookings-header h1 {
+                font-size: 2rem;
+                color: #2c3e50;
+                margin: 0;
+            }
+
+        .stats-badges {
+            display: flex;
+            gap: 15px;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .bookings-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+            .btn-info:hover {
+                background: #138496;
+            }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+            .btn-warning:hover {
+                background: #e0a800;
+            }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background: #c82333;
+            }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+            .back-link:hover {
+                background: #5a6268;
+            }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+            .empty-state i {
+                font-size: 4rem;
+                margin-bottom: 20px;
+                opacity: 0.3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+
+        <div class="bookings-header">
+            <div>
+                <h1>Manage Bookings</h1>
+                <p style="color: #7f8c8d; margin-top: 8px;">View and manage all reservations</p>
+            </div>
+            <div class="stats-badges">
+                <span class="badge badge-warning">⏱ @pendingBookings.Count Pending</span>
+                <span class="badge badge-success">✓ @confirmedBookings.Count Confirmed</span>
+                <span class="badge badge-danger">✗ @cancelledBookings.Count Cancelled</span>
+            </div>
+        </div>
+
+        @if (Model.Any())
+        {
+            <div class="bookings-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Guest ID</th>
+                            <th>Room ID</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model.OrderByDescending(b => b.BookingId))
+                        {
+                            <tr>
+                                <td><strong>#@booking.BookingId</strong></td>
+                                <td>Guest #@booking.Gid</td>
+                                <td>Room #@booking.RoomId</td>
+                                <td>@booking.CheckIn.ToString("MMM dd, yyyy")</td>
+                                <td>@booking.CheckOut.ToString("MMM dd, yyyy")</td>
+                                <td>
+                                    @{
+                                        var statusClass = booking.BookingStatus?.ToLower() switch
+                                        {
+                                            "pending" => "status-pending",
+                                            "confirmed" => "status-confirmed",
+                                            "cancelled" => "status-cancelled",
+                                            _ => "status-pending"
+                                        };
+                                    }
+                                    <span class="status-badge @statusClass">
+                                        @(booking.BookingStatus ?? "Unknown")
+                                    </span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <div class="actions">
+                                        <a href="/Bookings/Details/@booking.BookingId" class="btn-sm btn-info" title="View Details">👁️</a>
+                                        <a href="/Bookings/Edit/@booking.BookingId" class="btn-sm btn-warning" title="Edit">✏️</a>
+                                        <a href="/Bookings/Delete/@booking.BookingId" class="btn-sm btn-danger" title="Delete">🗑️</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="bookings-table">
+                <div class="empty-state">
+                    <div style="font-size: 4rem; opacity: 0.3;">📅</div>
+                    <h3 style="color: #6c757d; margin-bottom: 10px;">No bookings found</h3>
+                    <p style="color: #95a5a6;">All bookings will appear here</p>
+                </div>
+            </div>
+        }
+
+        <a href="/Admin/Dashboard/Index" class="back-link">← Back to Dashboard</a>
+    </div>
+</body>
+</html>

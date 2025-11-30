@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Bookify.Domain.Entities.Room>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Rooms";
+}
+
+<h2>Manage Rooms</h2>
+
+<div style="margin-bottom:12px;">
+    <a class="btn primary-btn" href="~/Rooms/Create">Add Room (uses public Create)</a>
+</div>
+
+<table class="admin-table">
+    <thead>
+        <tr><th>Id</th><th>Type</th><th>Status</th><th>Price</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.RoomId</td>
+                <td>@r.RoomType</td>
+                <td>@r.Rstatus</td>
+                <td>@string.Format("{0:C}", r.Price)</td>
+                <td>
+                    <a class="btn small" href="~/Rooms/Details/@r.RoomId">View</a>
+                    <a class="btn small" href="~/Rooms/Edit/@r.RoomId">Edit</a>
+                    <form method="post" action="~/Rooms/Delete/@r.RoomId" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn small danger" onclick="return confirm('Delete room?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

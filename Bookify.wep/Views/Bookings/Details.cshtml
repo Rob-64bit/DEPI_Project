@@ -1,0 +1,180 @@
+﻿@model Bookify.wep.Models.Bookings.BookingDto
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .details-header {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+            .details-header h1 {
+                margin: 0 0 10px 0;
+                color: #2c3e50;
+                font-size: 2rem;
+            }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .detail-row {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #7f8c8d;
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            color: #2c3e50;
+            font-size: 1.05rem;
+        }
+
+        .actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #B29575;
+            color: white;
+        }
+
+            .btn-primary:hover {
+                background: #9a7a5f;
+            }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background: #c82333;
+            }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+            .btn-secondary:hover {
+                background: #5a6268;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="details-card">
+            <div class="details-header">
+                <h1>Booking #@Model.BookingId</h1>
+                @{
+                    var statusClass = Model.BookingStatus?.ToLower() switch
+                    {
+                        "pending" => "status-pending",
+                        "confirmed" => "status-confirmed",
+                        "cancelled" => "status-cancelled",
+                        _ => "status-pending"
+                    };
+                }
+                <span class="status-badge @statusClass">@Model.BookingStatus</span>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Booking ID:</div>
+                <div class="detail-value">#@Model.BookingId</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Guest ID:</div>
+                <div class="detail-value">Guest #@Model.Gid</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Room ID:</div>
+                <div class="detail-value">Room #@Model.RoomId</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Check-In Date:</div>
+                <div class="detail-value">@Model.CheckIn.ToString("MMMM dd, yyyy")</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Check-Out Date:</div>
+                <div class="detail-value">@Model.CheckOut.ToString("MMMM dd, yyyy")</div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Total Nights:</div>
+                <div class="detail-value">@((Model.CheckOut.DayNumber - Model.CheckIn.DayNumber)) nights</div>
+            </div>
+
+            <div class="actions">
+                <a href="/Bookings/Edit/@Model.BookingId" class="btn btn-primary">Edit Booking</a>
+                <a href="/Bookings/Delete/@Model.BookingId" class="btn btn-danger">Delete Booking</a>
+                <a href="/Bookings/Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿@model Bookify.wep.Models.Auth.RegisterViewModel
+@{
+    ViewData["Title"] = "Sign Up - Seaside Hotel";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/signup-styles.css" />
+
+}
+
+
+<div class="page-container">
+    <header class="logo-header">
+        <a asp-controller="Home" asp-action="Index" class="logo">
+            <div class="shell-icon" aria-hidden="true"></div>
+            SEASIDE HOTEL
+        </a>
+    </header>
+
+    <div class="login-box register-box">
+        <h2 class="log-in-title">Sign Up</h2>
+
+        <form asp-action="Register" asp-controller="Auth" method="post" class="register-form">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn primary-btn">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

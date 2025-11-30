@@ -1,0 +1,206 @@
+﻿@model Bookify.Domain.Entities.Booking
+@{
+    ViewData["Title"] = "Booking Details";
+    var totalNights = (Model.CheckOut.DayNumber - Model.CheckIn.DayNumber);
+    var totalPrice = totalNights * (ViewBag.RoomPrice ?? 0);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <style>
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #B29575;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+            .header h1 {
+                color: #2c3e50;
+                margin: 0 0 10px 0;
+                font-size: 2rem;
+            }
+
+        .status {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #B29575;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-label {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .total-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: #B29575;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+            .back-btn:hover {
+                background: #9a7a5f;
+                transform: translateY(-2px);
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="booking-card">
+            <!-- Header -->
+            <div class="header">
+                <h1>🏨 Booking Confirmation</h1>
+                <span class="status">✓ @Model.BookingStatus</span>
+                <p style="color: #7f8c8d; margin-top: 15px; font-size: 0.95rem;">
+                    Reference: <strong>SEASIDE-@Model.BookingId</strong>
+                </p>
+            </div>
+
+            <!-- Guest Information -->
+            <div class="section">
+                <div class="section-title">
+                    👤 Guest Information
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Name</span>
+                    <span class="detail-value">@ViewBag.GuestName</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Phone</span>
+                    <span class="detail-value">@ViewBag.GuestPhone</span>
+                </div>
+            </div>
+
+            <!-- Room Information -->
+            <div class="section">
+                <div class="section-title">
+                    🛏️ Room Information
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Room Type</span>
+                    <span class="detail-value">@ViewBag.RoomType</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Room Number</span>
+                    <span class="detail-value">Room #@Model.RoomId</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Price per Night</span>
+                    <span class="detail-value">$@ViewBag.RoomPrice</span>
+                </div>
+            </div>
+
+            <!-- Stay Information -->
+            <div class="section">
+                <div class="section-title">
+                    📅 Stay Information
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Check-In</span>
+                    <span class="detail-value">@Model.CheckIn.ToString("MMMM dd, yyyy")</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Check-Out</span>
+                    <span class="detail-value">@Model.CheckOut.ToString("MMMM dd, yyyy")</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Total Nights</span>
+                    <span class="detail-value">@totalNights nights</span>
+                </div>
+            </div>
+
+            <div class="total-section">
+                <div class="total-row">
+                    <span>Total Amount Paid</span>
+                    <span style="color: #B29575;">$@totalPrice.00</span>
+                </div>
+            </div>
+             
+            @if (Model.BookingStatus != "canceled")
+            {
+                <form asp-action="CancelBooking" method="post" class="mt-3">
+                    <input type="hidden" name="id" value="@Model.BookingId" />
+                    <button class="btn btn-danger">Cancel Booking</button>
+                </form>
+            }
+            else
+            {
+                <span class="badge bg-secondary">This booking was canceled</span>
+            }
+
+
+            <a href="/" class="back-btn" style="display: block;">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

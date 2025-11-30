@@ -1,0 +1,84 @@
+﻿/* ===== Create / Edit Rooms Page Styling ===== */
+
+.rooms-form-container {
+    max-width: 900px;
+    margin: 24px auto;
+}
+
+.rooms-form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.rooms-form-title {
+    margin: 0;
+}
+
+.rooms-form-subtitle {
+    margin: 4px 0 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Card wrapper */
+.rooms-form-card {
+    padding: 18px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* Form grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.text-danger {
+    font-size: 0.85rem;
+    margin-top: 6px;
+    display: block;
+}
+
+/* Action buttons */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    align-items: center;
+}
+
+.form-tip {
+    margin-left: auto;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 720px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

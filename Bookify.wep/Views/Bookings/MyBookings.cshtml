@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Bookify.Domain.Entities.Booking>
+
+<h2>My Bookings</h2>
+
+<form method="get" asp-action="MyBookings">
+    <label>Enter your phone number:</label>
+    <input type="text" name="phone" class="form-control" />
+    <button class="btn btn-primary mt-2">Search</button>
+</form>
+
+@if (Model.Any())
+{
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Room</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td>@b.BookingId</td>
+                    <td>@b.RoomId</td>
+                    <td>@b.CheckIn</td>
+                    <td>@b.CheckOut</td>
+                    <td>@b.BookingStatus</td>
+                    <td>
+                        @{
+                            var payment = b.Payments.FirstOrDefault()?.Amount ?? 0;
+                        }
+                        @String.Format("{0:C}", payment)
+
+                    </td>
+                    <td>
+                        <a asp-action="CustomerDetails" asp-route-id="@b.BookingId" class="btn btn-info btn-sm">View</a>
+
+                        @if (b.BookingStatus != "canceled")
+                        {
+                            <form asp-action="CancelBooking" method="post" style="display:inline-block;">
+                                <input type="hidden" name="id" value="@b.BookingId" />
+                                <button class="btn btn-danger btn-sm">Cancel</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No bookings found.</p>
+}

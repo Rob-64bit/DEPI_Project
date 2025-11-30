@@ -1,0 +1,96 @@
+﻿
+
+:root {
+    --primary-color: #0d6efd; /* أزرق Bootstrap الأساسي */
+    --success-color: #198754; /* أخضر Bootstrap للنجاح */
+    --warning-color: #ffc107; /* أصفر Bootstrap للتحذير */
+    --danger-color: #dc3545; /* أحمر Bootstrap للخطر */
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* ظل خفيف للكروت */
+}
+
+/* تحسين الخلفية والقراءة العامة */
+body {
+    background-color: #f8f9fa; /* خلفية فاتحة جدًا */
+    color: var(--text-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* خط سهل القراءة */
+}
+
+/* تنسيق العناوين (Manage Users) */
+.h2 {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* تنسيق لوحات الإحصائيات (Cards) */
+.card {
+    border: none; /* إزالة الحدود الافتراضية لـ Bootstrap */
+    border-radius: 12px; /* حواف مستديرة أكثر */
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s;
+}
+
+    .card:hover {
+        transform: translateY(-2px); /* تأثير رفع خفيف عند المرور بالماوس */
+    }
+
+    .card h2 {
+        font-weight: 700;
+        margin-top: 5px;
+        color: var(--primary-color);
+    }
+
+/* شارة إجمالي المستخدمين في الأعلى */
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    border-radius: 20px;
+    padding: 10px 20px !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* تنسيق الجدول */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 5px; /* مسافة بين صفوف الجدول */
+}
+
+    .table thead th {
+        border-bottom: 2px solid #dee2e6;
+        color: var(--text-muted);
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+
+    .table tbody tr {
+        background-color: #fff; /* خلفية بيضاء لصفوف البيانات */
+        border-radius: 8px; /* حواف مستديرة للصفوف */
+        transition: background-color 0.15s;
+    }
+
+        .table tbody tr:hover {
+            background-color: #f0f0f0 !important; /* خلفية عند المرور بالماوس */
+        }
+
+        /* تمييز الصف الخاص بالمستخدم الحالي */
+        .table tbody tr[style*="background:#fffbea"] {
+            background-color: #fff8e1 !important; /* لون أصفر فاتح جذاب */
+            border: 1px solid var(--warning-color);
+        }
+
+    /* تنسيق أزرار الإجراءات */
+    .table td .btn-sm {
+        margin-left: 5px;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+/* تحسين عرض الرسائل المؤقتة (Success/Error Alerts) */
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    padding: 15px;
+}

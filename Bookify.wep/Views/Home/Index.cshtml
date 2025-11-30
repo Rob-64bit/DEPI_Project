@@ -1,0 +1,108 @@
+﻿@{
+
+    ViewData["Tittle"] = "Home";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Welcome to Seaside Hotel</h1>
+        <p class="hero-subtitle">Luxury & Comfort by the Ocean</p>
+        <a href="#" class="btn primary-btn">Book Your Stay</a>
+    </div>
+</section>
+
+<section id="about" class="about-us-section container">
+    <div class="about-image-container">
+        <div class="about-image"></div>
+    </div>
+    <div class="about-content">
+        <h2 class="section-heading">About Us</h2>
+        <p>Experience luxury and comfort at Seaside Hotel—where every stay feels like home.</p>
+        <p>Nestled along the pristine coastline, our hotel offers breathtaking views; elegant rooms, and first-class service.</p>
+        <a href="#" class="btn secondary-btn">Learn More</a>
+    </div>
+</section>
+
+@* <section class="our-rooms-section container">
+    <h2 class="section-heading">Our Rooms</h2>
+    <div class="rooms-grid">
+        <div class="room-card">
+            <div class="room-image-placeholder room-deluxe"></div>
+            <h3 class="room-title">Deluxe Room</h3>
+            <p class="room-price">$180 / night</p>
+            <a href="room_detail.html?room=deluxe" class="btn tertiary-btn">View Details</a>
+        </div>
+
+        <div class="room-card">
+            <div class="room-image-placeholder ocean-view"></div>
+            <h3 class="room-title">Ocean View Suite</h3>
+            <p class="room-price">$250 / night</p>
+            <a href="room_detail.html?room=ocean" class="btn tertiary-btn">View Details</a>
+        </div>
+
+        <div class="room-card">
+            <div class="room-image-placeholder family-room"></div>
+            <h3 class="room-title">Family Room</h3>
+            <p class="room-price">$210 / night</p>
+            <a href="room_detail.html?room=family" class="btn tertiary-btn">View Details</a>
+        </div>
+    </div>
+</section>
+ *@
+
+ <section class="our-rooms-section container" id="home-rooms">
+    <h2 class="section-heading">Our Rooms</h2>
+
+    <div class="rooms-grid">
+
+        <div class="room-card">
+            <div class="room-image-placeholder" style="background-image:url('/images/rooms/room4.jpeg');"></div>
+            <h3 class="room-title">Deluxe Room</h3>
+            <p class="room-price">$180 / night</p>
+            <a asp-controller="Rooms" asp-action="Index" class="btn tertiary-btn">View Details</a>
+        </div>
+
+        <div class="room-card">
+            <div class="room-image-placeholder" style="background-image:url('/images/rooms/room2.jpeg');"></div>
+            <h3 class="room-title">Ocean View Suite</h3>
+            <p class="room-price">$250 / night</p>
+            <a asp-controller="Rooms" asp-action="Index" class="btn tertiary-btn">View Details</a>
+        </div>
+
+        <div class="room-card">
+            <div class="room-image-placeholder" style="background-image:url('/images/rooms/room1.jpeg');"></div>
+            <h3 class="room-title">Family Room</h3>
+            <p class="room-price">$210 / night</p>
+            <a asp-controller="Rooms" asp-action="Index" class="btn tertiary-btn">View Details</a>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+ 
+<section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <p><strong>Address:</strong> Seaside Hotel, Beach Road</p>
+            <p><strong>Phone:</strong> +1 555 123 456</p>
+            <p><strong>Email:</strong> info@seasidehotel.com</p>
+        </div>
+
+       
+    </div>
+</section>
+
+<link rel="stylesheet" href="~/css/styles.css" />
+<script src="~/js/nav.js"></script>
+
+<script src="~/js/nav.js"></script>

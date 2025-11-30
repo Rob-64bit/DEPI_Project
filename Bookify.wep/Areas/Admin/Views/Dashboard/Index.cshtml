@@ -1,0 +1,135 @@
+﻿@model Bookify.wep.Areas.Admin.Controllers.AdminDashboardVm
+@{
+    // إعدادات العرض (View)
+    Layout = null;  // ✅ مش هنستخدم أي Layout خالص
+    ViewData["Title"] = "Dashboard";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+    <header class="navbar">
+        <div class="navbar-inner">
+            <a href="/" class="logo">Seaside Hotel</a>
+
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/Rooms">Rooms</a>
+                <a href="/Home/About">About</a>
+                <a href="/Home/Contact">Contact</a>
+                <a href="/Admin/Dashboard" class="admin-dashboard-link">Dashboard</a>
+            </nav>
+
+            <div class="user-area">
+                <span class="greeting">Hi, Admin</span>
+                <a href="/Auth/Logout" class="btn btn-ghost">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="/Admin/Dashboard/Index" class="sidebar-link">
+                    <span class="icon">▣</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/Rooms/Index" class="sidebar-link">
+                    <span class="icon">■</span>
+                    <span>Manage Rooms</span>
+                </a>
+                <a href="/Bookings/Index" class="sidebar-link">
+                    <span class="icon">☰</span>
+                    <span>Manage Bookings</span>
+                </a>
+
+                @* ====== Payments link: use same sidebar-link class so CSS and pointer events apply ====== *@
+                @* If Payments controller is in the root (no Area) keep asp-area="".
+                   If you later move Payments into Admin area change asp-area="Admin" or use href="/Admin/Payments" *@
+                <a href="/Payments/Index" class="sidebar-link">
+                    <span class="icon">💳</span><span>Payments</span>
+                </a>
+
+
+                <hr class="sidebar-divider">
+                <a href="/" class="sidebar-link">
+                    <span class="icon">←</span>
+                    <span>Back to Site</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+
+            <div class="dashboard-header">
+                <h1>Dashboard</h1>
+                <p class="dashboard-subtitle">Welcome back! Here's what's happening.</p>
+            </div>
+
+            <div class="dashboard-cards">
+
+                <div class="dash-card">
+                    <div class="card-icon">■</div>
+                    <div class="card-content">
+                        <div class="card-title">Total Rooms</div>
+                        <div class="card-value">@Model.RoomsCount</div>
+                        <a href="/Rooms/Index" class="card-link">Manage Rooms →</a>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <div class="card-icon">☰</div>
+                    <div class="card-content">
+                        <div class="card-title">Total Bookings</div>
+                        <div class="card-value">@Model.BookingsCount</div>
+                        <a href="/Bookings/Index" class="card-link">View All →</a>
+                    </div>
+                </div>
+
+                <div class="dash-card pending">
+                    <div class="card-icon">⏱</div>
+                    <div class="card-content">
+                        <div class="card-title">Pending Bookings</div>
+                        <div class="card-value">@Model.PendingCount</div>
+                        <div class="card-status">Needs attention</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- دي عشان تظهر اليوزر -->
+            <div class="dash-card">
+                <div class="card-icon">👥</div>
+                <div class="card-content">
+                    <div class="card-title">Total Users</div>
+                    <div class="card-value">@Model.UsersCount</div>
+                    <a href="/Admin/Users/Index" class="card-link">Manage Users →</a>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="/Rooms/Create" class="action-btn">
+                        <span>+</span> Add New Room
+                    </a>
+                    <a href="/Bookings/Index" class="action-btn">
+                        <span>≡</span> View All Bookings
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</body>
+</html>

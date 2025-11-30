@@ -1,0 +1,172 @@
+/* Custom properties (Shared Colors) */
+:root {
+    --primary-color: #B29575; 
+    --secondary-color: #F7F5F0; 
+    --text-color: #4C4133; 
+    --light-text-color: #FFFFFF;
+    --nav-bg: #FFFFFF;
+    --success-color: #38761D; /* لون أخضر داكن للنجاح */
+    --box-bg-color: #FFF;
+    --hover-duration: 0.3s;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Roboto', sans-serif;
+}
+
+/* Base and Shared Styles (Copying Navbar & Buttons for consistency) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--nav-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.nav-links a { margin-left: 25px; text-decoration: none; color: var(--text-color); }
+.login-btn, .signup-btn {
+    padding: 8px 15px; 
+    border-radius: 3px;
+    transition: color 0.3s, background-color 0.3s;
+}
+.login-btn:hover { color: var(--primary-color); }
+.signup-btn { background-color: var(--primary-color); color: var(--light-text-color); margin-left: 10px; }
+.signup-btn:hover { background-color: #9E8465; }
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--hover-duration) ease-in-out;
+    letter-spacing: 0.5px;
+}
+.btn.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+    width: 100%;
+}
+.btn.primary-btn:hover {
+    background-color: #9E8465;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Confirmation Page Specific Styles --- */
+
+.confirmation-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* لتوسيط المحتوى عمودياً */
+}
+
+.confirmation-box {
+    max-width: 600px;
+    background-color: var(--box-bg-color);
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4em;
+    color: var(--success-color);
+    margin-bottom: 20px;
+}
+
+.confirmation-title {
+    font-family: var(--font-serif);
+    font-size: 2.5em;
+    color: var(--success-color);
+    margin-bottom: 10px;
+}
+
+.confirmation-subtitle {
+    font-size: 1.1em;
+    color: #6a6a6a;
+    margin-bottom: 30px;
+}
+
+/* Summary Details */
+.summary-details {
+    text-align: left;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    border: 1px dashed #E0E0E0;
+}
+
+.detail-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dotted #E0E0E0;
+}
+.detail-line:last-child {
+    border-bottom: none;
+    padding-top: 10px;
+    font-weight: 700;
+}
+
+.label {
+    font-weight: 400;
+    color: #6a6a6a;
+}
+
+.ref-number, .total-paid {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Next Steps */
+.next-steps p {
+    margin-bottom: 20px;
+    font-size: 0.95em;
+}
+
+.back-home-btn {
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.view-booking-link {
+    display: block;
+    font-size: 0.9em;
+    color: var(--primary-color);
+}
+.view-booking-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 600px) {
+    .confirmation-box {
+        padding: 30px 20px;
+    }
+    .confirmation-title {
+        font-size: 2em;
+    }
+}

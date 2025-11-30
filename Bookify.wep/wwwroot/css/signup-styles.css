@@ -1,0 +1,167 @@
+/* Custom properties - using the same warm color palette */
+:root {
+    --primary-color: #B29575; 
+    --secondary-color: #F7F5F0; 
+    --text-color: #4C4133; 
+    --light-text-color: #FFFFFF;
+    --box-background: #FFFFFF; 
+    --hover-duration: 0.3s;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-color);
+    /* background image with overlay for signup page */
+    background-image: linear-gradient(rgba(0,0,0,0.32), rgba(0,0,0,0.32)), url('imgs/images.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--hover-duration);
+}
+
+/* --- Header & Logo --- */
+.page-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo-header h1 {
+    font-family: var(--font-serif);
+    font-size: 1.2em;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Shell Icon Styling */
+.shell-icon {
+    width: 45px; 
+    height: 45px;
+    margin: 0 auto;
+    background-color: #F7F5F0; 
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--primary-color);
+    border-top-color: transparent;
+}
+.shell-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    border-bottom-color: transparent;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+
+/* --- Sign Up Box --- */
+/* تم تغيير الاسم من .login-box إلى .signup-box في ملف HTML لصفحة إنشاء الحساب */
+.signup-box {
+    background-color: var(--box-background);
+    padding: 30px 40px; /* تقليل الـ padding ليناسب الحقول الإضافية */
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.signup-title {
+    font-family: var(--font-serif);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* --- Form Styles --- */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FFF;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+/* --- Button Styling --- */
+.btn.primary-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn.primary-btn:hover {
+    background-color: #9E8465;
+}
+
+/* تعديل الروابط السفلية */
+.login-link {
+    display: block;
+    margin-top: 25px;
+    font-size: 0.95em;
+    color: var(--primary-color);
+}
+.login-link:hover {
+    text-decoration: underline;
+}

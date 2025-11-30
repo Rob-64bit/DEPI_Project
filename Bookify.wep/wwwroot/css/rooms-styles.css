@@ -1,0 +1,443 @@
+/* Custom properties for easy color and font management - (مكررة لضمان استقلالية الصفحة) */
+:root {
+    --primary-color: #B29575; 
+    --secondary-color: #F7F5F0; 
+    --text-color: #4C4133; 
+    --light-text-color: #FFFFFF;
+    --nav-bg: #FFFFFF;
+    --image-placeholder-color: #DDD4C6;
+    --hover-duration: 0.3s;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Roboto', sans-serif;
+}
+
+/* Basic Reset and Global Styles (مكررة لضمان استقلالية الصفحة) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    direction: ltr; 
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color var(--hover-duration), background-color var(--hover-duration);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+}
+
+.section-heading {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* --- Navigation Bar (مكررة لضمان استقلالية الصفحة) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    background-color: var(--nav-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links a {
+    margin-left: 25px;
+    font-size: 0.95em;
+    font-weight: 400;
+}
+
+.nav-links a:not(.book-now-btn):hover {
+    color: var(--primary-color);
+}
+
+.login-btn, .signup-btn {
+    padding: 8px 15px; 
+    border-radius: 3px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.login-btn:hover {
+    color: var(--primary-color);
+}
+.signup-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    margin-left: 10px;
+}
+.signup-btn:hover {
+    background-color: #9E8465;
+}
+
+.book-now-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 8px 15px;
+    border-radius: 3px;
+    margin-left: 30px;
+    transition: all var(--hover-duration) ease-in-out;
+}
+.book-now-btn:hover {
+    background-color: #9E8465;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Buttons (مكررة لضمان استقلالية الصفحة) --- */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 0.95em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--hover-duration) ease-in-out;
+    letter-spacing: 0.5px;
+}
+.btn.primary-btn, .book-room-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+}
+.btn.primary-btn:hover, .book-room-btn:hover {
+    background-color: #9E8465;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.secondary-btn {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 30px;
+}
+.secondary-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+/* Styles for Add and Edit controls on the Rooms page */
+.add-room-btn {
+    padding: 8px 14px;
+    font-size: 0.95em;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.edit-room-btn {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+}
+
+.action-buttons {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Add area placement under filters */
+.add-room-area {
+    max-width: 900px;
+    margin: 16px auto 0;
+    text-align: right;
+}
+
+/* Danger / Delete button */
+.danger-btn {
+    background-color: transparent;
+    border: 1px solid #d9534f;
+    color: #d9534f;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+.danger-btn:hover {
+    background-color: #d9534f;
+    color: var(--light-text-color);
+}
+
+
+/* --- تنسيقات صفحة عرض الغرف الكاملة (Rooms Page) --- */
+
+.rooms-page-content {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.rooms-header {
+    margin-bottom: 40px;
+}
+
+.rooms-header .section-heading {
+    font-size: 3em;
+    margin-bottom: 5px;
+}
+
+.rooms-subtitle {
+    font-size: 1.1em;
+    color: #6a6a6a;
+}
+
+/* تنسيق أيقونة الصدفة الصغيرة فوق العنوان */
+.shell-icon-small {
+    width: 25px;
+    height: 25px;
+    margin: 0 auto 10px;
+    border: 3px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    transform: rotate(180deg);
+}
+
+/* --- أدوات التصفية والبحث --- */
+.filter-controls {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background-color: #FFF;
+    text-align: left;
+}
+
+.date-picker-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.date-picker-group input,
+.date-picker-group select {
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 1em;
+    flex-grow: 1;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    flex-grow: 0;
+    min-width: 120px;
+}
+
+.amenity-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.9em;
+}
+
+.amenity-filters label {
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.filter-option {
+    padding: 8px 15px;
+    border: 1px solid var(--primary-color);
+    background-color: #FFF;
+    color: var(--primary-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-option:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+.sort-by {
+    margin-left: auto;
+    padding: 8px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}
+
+/* --- شبكة عرض الغرف (Grid) --- */
+.full-rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 900px;
+    margin: 40px auto 0;
+}
+
+.room-card-full {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.room-card-full:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.room-image {
+    width: 100%;
+    height: 220px;
+    background-color: var(--image-placeholder-color);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 3px solid #EAEAEA;
+}
+/* room images mapping (use imgs/ folder) */
+.room-image.room-deluxe { background-image: url('imgs/room1.jpeg'); }
+.room-image.room-ocean-view { background-image: url('imgs/room2.jpeg'); }
+.room-image.room-family { background-image: url('imgs/room3.jpeg'); }
+.room-image.room-single { background-image: url('imgs/room4.jpeg'); }
+
+.card-content {
+    padding: 20px;
+}
+
+.room-title {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.room-description {
+    color: #6a6a6a;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    height: 38px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #EFEBE4;
+}
+
+.room-price {
+    font-size: 1.3em;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.book-room-btn {
+    padding: 8px 20px;
+    font-size: 0.9em;
+}
+
+/* --- Responsive Adjustments لصفحة الغرف --- */
+@media (max-width: 992px) {
+    .full-rooms-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .date-picker-group {
+        flex-direction: column;
+    }
+    .filter-btn {
+        width: 100%;
+        min-width: auto;
+    }
+    .amenity-filters {
+        justify-content: center;
+        text-align: center;
+    }
+    .sort-by {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+@media (max-width: 600px) {
+    .rooms-header .section-heading {
+        font-size: 2.5em;
+    }
+    .room-image {
+        height: 180px;
+    }
+}
+
+/* Modal styles for Add/Edit room */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+}
+.modal.open { display: flex; }
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+.modal-dialog {
+    position: relative;
+    background: #fff;
+    border-radius: 6px;
+    padding: 20px;
+    width: 520px;
+    max-width: calc(100% - 32px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    z-index: 10;
+    text-align: left;
+}
+.modal-dialog h3 { margin-top: 0; margin-bottom: 8px; font-family: var(--font-serif); }
+.modal-dialog label { display: block; margin-bottom: 10px; font-size: 0.95em; }
+.modal-dialog input[type="text"],
+.modal-dialog input[type="number"],
+.modal-dialog textarea,
+.modal-dialog select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin-top: 6px;
+}
+.modal-close {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1.6em;
+    cursor: pointer;
+    color: #666;
+}
+.modal-actions { display: flex; gap: 10px; margin-top: 12px; justify-content: flex-end; }
+.modal .btn { padding: 8px 14px; }
+
+@media (max-width: 600px) {
+    .modal-dialog { width: 95%; padding: 14px; }
+}

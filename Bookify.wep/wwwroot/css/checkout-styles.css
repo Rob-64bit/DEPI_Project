@@ -1,0 +1,244 @@
+/* Custom properties (Shared Colors) */
+:root {
+    --primary-color: #B29575; 
+    --secondary-color: #F7F5F0; 
+    --text-color: #4C4133; 
+    --light-text-color: #FFFFFF;
+    --nav-bg: #FFFFFF;
+    --image-placeholder-color: #DDD4C6;
+    --box-bg-color: #FFF;
+    --hover-duration: 0.3s;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Roboto', sans-serif;
+}
+
+/* Base and Shared Styles (Copy of Navbar & Buttons) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--nav-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.nav-links a { margin-left: 25px; text-decoration: none; color: var(--text-color); }
+
+/* Buttons in Navbar */
+.book-now-btn, .btn.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 8px 15px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+.book-now-btn:hover, .btn.primary-btn:hover {
+    background-color: #9E8465;
+}
+
+.login-btn, .signup-btn {
+    padding: 8px 15px; 
+    border-radius: 3px;
+    transition: color 0.3s, background-color 0.3s;
+}
+.login-btn:hover { color: var(--primary-color); }
+.signup-btn { background-color: var(--primary-color); color: var(--light-text-color); margin-left: 10px; }
+.signup-btn:hover { background-color: #9E8465; }
+
+/* --- Checkout Page Specific Styles --- */
+
+.checkout-page-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.page-title {
+    font-family: var(--font-serif);
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.checkout-layout {
+    display: flex;
+    gap: 30px;
+}
+
+/* --- Columns Styling --- */
+.booking-details-column {
+    flex: 3; /* يأخذ جزء أكبر */
+}
+.payment-summary-column {
+    flex: 2; /* يأخذ جزء أصغر */
+}
+
+/* --- Shared Section Box Style --- */
+.section-box {
+    background-color: var(--box-bg-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.section-box h3 {
+    font-family: var(--font-sans);
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 1px solid #EEE;
+    padding-bottom: 10px;
+}
+
+.section-box h3 .fas {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+/* --- Room Summary Section --- */
+.room-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.room-image-small {
+    width: 100px;
+    height: 80px;
+    background-color: var(--image-placeholder-color);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+.room-info .text-info h4 {
+    font-family: var(--font-serif);
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+.room-info .text-info p {
+    font-size: 0.95em;
+    color: #6a6a6a;
+    line-height: 1.4;
+}
+.room-info .text-info span {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* --- Form Styles (Guest Info & Payment) --- */
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+input:focus, textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+.half-width {
+    flex: 1;
+}
+
+/* --- Price Summary Section --- */
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #6a6a6a;
+}
+.price-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 2px solid var(--primary-color);
+}
+.price-total span {
+    font-size: 1.4em;
+    font-weight: 700;
+}
+.total-amount {
+    color: var(--primary-color);
+}
+
+/* --- Payment Form --- */
+.accepted-cards {
+    margin-bottom: 20px;
+}
+.accepted-cards .fab {
+    font-size: 2em;
+    color: #A0A0A0;
+    margin-right: 10px;
+}
+.final-pay-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+.security-note {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #6a6a6a;
+}
+.security-note .fas {
+    color: green;
+    margin-right: 5px;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .checkout-layout {
+        flex-direction: column-reverse; /* وضع ملخص السعر في الأعلى على الموبايل */
+    }
+    .page-title {
+        font-size: 2.5em;
+    }
+}
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+}

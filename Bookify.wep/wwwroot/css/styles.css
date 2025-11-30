@@ -1,0 +1,510 @@
+/* styles.css — Simple & Clean Design */
+
+/* ---------- variables ---------- */
+:root {
+    --primary-color: #B29575;
+    --secondary-color: #F7F5F0;
+    --text-color: #4C4133;
+    --muted-text: #6b5f51;
+    --light-text-color: #fff;
+    --navbar-height: 70px;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Roboto', sans-serif;
+}
+
+/* ---------- reset & global ---------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    padding-top: var(--navbar-height);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* links */
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    a:hover {
+        color: var(--primary-color);
+    }
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: #b58868;
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+    .nav-links a {
+        padding: 5px 10px;
+        font-weight: 500;
+    }
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.greeting {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+    padding: 6px 12px;
+    background: #f5f0ea;
+    border-radius: 15px;
+}
+
+/* Admin Box */
+.admin-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    background: #f5f0ea;
+    border-radius: 6px;
+}
+
+.admin-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.admin-box a {
+    font-size: 0.85rem;
+    color: var(--muted-text);
+    padding: 3px 6px;
+}
+
+    .admin-box a:hover {
+        color: var(--primary-color);
+    }
+
+/* ---------- BUTTONS ---------- */
+.btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+}
+
+    .btn-primary:hover {
+        background: #9a7a5f;
+        color: var(--light-text-color);
+    }
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid #ddd;
+    color: var(--muted-text);
+}
+
+    .btn-ghost:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+.btn.secondary-btn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+    .btn.secondary-btn:hover {
+        background: var(--primary-color);
+        color: var(--light-text-color);
+    }
+
+/* ---------- HERO ---------- */
+.hero-section {
+    position: relative;
+    height: 65vh;
+    min-height: 450px;
+    background-image: url('/images/wallpapersden.com_76876-1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+    .hero-section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.4);
+        z-index: 1;
+    }
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--muted-text);
+    margin-bottom: 25px;
+}
+
+.hero-content .btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+    margin: 0 5px;
+}
+
+/* ---------- ABOUT ---------- */
+.about-us-section {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    padding: 60px 30px;
+    background: #fff;
+    border-radius: 10px;
+    margin: 30px auto;
+    max-width: 1100px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.about-image-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-image {
+    width: 100%;
+    height: 350px;
+    background-image: url('/images/68467637.avif'),url('/images/istockphoto-174301138-1024x1024.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.about-content {
+    flex: 1;
+    max-width: 550px;
+}
+
+.section-heading {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+    color: var(--muted-text);
+    line-height: 1.7;
+}
+
+/* ---------- ROOMS ---------- */
+.our-rooms-section {
+    padding: 50px 20px 80px;
+}
+
+    .our-rooms-section .section-heading {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.room-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+    .room-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+
+.room-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #eee;
+    background-size: cover;
+    background-position: center;
+}
+
+    .room-image-placeholder.room-deluxe {
+        background-image: url('/images/room1.jpeg');
+    }
+
+    .room-image-placeholder.ocean-view {
+        background-image: url('/images/room2.jpeg');
+    }
+
+    .room-image-placeholder.family-room {
+        background-image: url('/images/room3.jpeg');
+    }
+
+.room-card > div:last-child {
+    padding: 20px;
+}
+
+.room-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.room-price {
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+}
+
+.btn.tertiary-btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid #ddd;
+    color: var(--primary-color);
+    width: 100%;
+}
+
+    .btn.tertiary-btn:hover {
+        background: var(--primary-color);
+        color: var(--light-text-color);
+        border-color: var(--primary-color);
+    }
+
+/* ---------- CONTACT ---------- */
+.contact-section {
+    padding: 60px 30px 80px;
+    background: #fff;
+    border-radius: 10px;
+    margin: 30px auto;
+    max-width: 1100px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+    .contact-section .section-heading {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+.contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 250px;
+}
+
+    .contact-info h3 {
+        margin-bottom: 10px;
+        font-family: var(--font-serif);
+    }
+
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #fafafa;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+    }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: #fff;
+        }
+
+    .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .contact-form button {
+        width: fit-content;
+        background: var(--primary-color);
+        color: var(--light-text-color);
+        padding: 12px 28px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+        .contact-form button:hover {
+            background: #9a7a5f;
+        }
+
+/* ---------- helpers ---------- */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px) {
+    .navbar-inner {
+        flex-direction: column;
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .user-area {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar {
+        height: auto;
+    }
+
+    body {
+        padding-top: 120px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .about-us-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .about-us-section,
+    .contact-section {
+        margin: 20px;
+    }
+}
+
+@media (max-width:600px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section-heading {
+        font-size: 1.6rem;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+
+    .rooms-grid {
+        grid-template-columns: 1fr;
+    }
+}

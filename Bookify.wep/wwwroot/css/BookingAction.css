@@ -1,0 +1,51 @@
+﻿@model Bookify.wep.Areas.Admin.Controllers.AdminDashboardVm 
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData ["Title"] = "Dashboard";
+}
+
+<div class="dashboard-header" >
+<h1 > Dashboard</h1 >
+<p class="dashboard-subtitle" > Welcome back! Here's what's happening.</p >
+</div >
+
+<div class="dashboard-cards" >
+<div class="dash-card" >
+<div class="card-icon" > ■</div >
+<div class = "card-content" >
+<div class="card-title" > Total Rooms</div >
+<div class="card-value" > @Model.RoomsCount</div >
+<a asp-area="" asp-controller="Rooms" asp-action="Index" class="card-link" > Manage Rooms →</a >
+</div >
+</div >
+
+<div class="dash-card" >
+<div class="card-icon" > ☰</div >
+<div class="card-content" >
+<div class="card-title" > Total Bookings</div >
+<div class="card-value" > @Model.BookingsCount</div >
+<a asp-area="" asp-controller="Bookings" asp-action="Index" class="card-link" > View All →</a >
+</div >
+</div >
+
+<div class="dash-card pending" >
+<div class="card-icon" > ⏱</div >
+<div class="card-content" >
+<div class="card-title" > Pending Bookings</div >
+<div class="card-value" > @Model.PendingCount</div >
+<div class="card-status" > Needs attention</div >
+</div >
+</div >
+</div >
+
+<div class="quick-actions" >
+<h2 > Quick Actions</h2 >
+<div class="action-buttons" >
+<a asp-area="" asp-controller="Rooms" asp-action="Create" class="action-btn" >
+<span > + </span > Add New Room
+</a >
+<a asp-area="" asp-controller="Bookings" asp-action="Index" class="action-btn" >
+<span > ≡</span > View All Bookings
+</a >
+</div >
+</div >

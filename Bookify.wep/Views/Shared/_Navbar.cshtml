@@ -1,0 +1,55 @@
+﻿@* Views/Shared/_Navbar.cshtml *@
+@{
+    Layout = null;  // ✅ ضيف السطر ده
+}
+@using Microsoft.AspNetCore.Http
+@{
+    // استرجاع بيانات الجلسة (Session)
+    var userRole = Context.Session.GetString("UserRole") ?? "";
+    var userName = Context.Session.GetString("UserName") ?? "";
+
+    // تحديد حالة المستخدم
+    var isAdmin = string.Equals(userRole, "admin", StringComparison.OrdinalIgnoreCase);
+    var isAuthenticated = !string.IsNullOrEmpty(userName);
+}
+
+<header class="navbar">
+    <div class="navbar-inner">
+
+        <a asp-controller="Home" asp-action="Index" class="logo">Seaside Hotel</a>
+
+        <nav class="nav-links">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-controller="Rooms" asp-action="Index">Rooms</a>
+           @*  <a asp-controller="Home" asp-action="About">About</a>
+            <a asp-controller="Home" asp-action="Contact">Contact</a> *@
+
+            <a class="nav-link" href="/#about">About</a>
+            <a class="nav-link" href="/#contact">Contact</a>
+
+
+                <a class="nav-link" asp-action="MyBookings" asp-controller="Bookings">My Bookings</a>
+
+
+            @if (isAdmin)
+            {
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="admin-dashboard-link">Dashboard</a>
+            }
+        </nav>
+
+        <div class="user-area">
+            @if (isAuthenticated)
+            {
+                // حالة المستخدم المسجل دخوله
+                <span class="greeting">Hi, @userName</span>
+                <a asp-controller="Auth" asp-action="Logout" class="btn btn-ghost">Logout</a>
+            }
+            else
+            {
+                // حالة المستخدم غير المسجل دخوله
+                <a asp-controller="Auth" asp-action="Login" class="btn btn-ghost">Log In</a>
+                <a asp-controller="Auth" asp-action="Register" class="btn btn-primary">Sign Up</a>
+            }
+        </div>
+    </div>
+</header>
